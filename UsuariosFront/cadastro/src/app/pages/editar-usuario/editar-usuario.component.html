@@ -1,0 +1,104 @@
+<p-toast></p-toast>
+
+<div class="edit-wrap">
+  <div class="edit-intro">
+    <h1>Editar cadastro</h1>
+    <p><a routerLink="/lista" class="back-link">← Voltar à lista</a></p>
+  </div>
+
+  @if (erro()) {
+    <p-message severity="error" [text]="erro()!" styleClass="edit-msg" />
+  } @else if (loading()) {
+    <p class="edit-loading">Carregando dados…</p>
+  } @else {
+    <p-card styleClass="edit-card">
+      <form (ngSubmit)="salvar()" class="edit-form">
+        <h2 class="section-title">Dados do usuário</h2>
+        <div class="form-stack" [formGroup]="usuarioForm">
+          <div class="field">
+            <label for="nome">Nome *</label>
+            <input id="nome" type="text" pInputText formControlName="nome" class="w-full" />
+          </div>
+          <div class="field">
+            <label for="sobrenome">Sobrenome *</label>
+            <input id="sobrenome" type="text" pInputText formControlName="sobrenome" class="w-full" />
+          </div>
+          <div class="field">
+            <label for="email">E-mail *</label>
+            <input id="email" type="email" pInputText formControlName="email" class="w-full" autocomplete="email" />
+          </div>
+          <div class="field">
+            <label for="dataNascimento">Data de nascimento</label>
+            <input id="dataNascimento" type="date" pInputText formControlName="dataNascimento" class="w-full" />
+          </div>
+          <div class="field">
+            <label for="genero">Gênero *</label>
+            <p-select
+              inputId="genero"
+              [options]="generos"
+              optionLabel="label"
+              optionValue="value"
+              formControlName="genero"
+              placeholder="Selecione"
+              styleClass="w-full"
+            ></p-select>
+          </div>
+        </div>
+
+        <h2 class="section-title">Endereço</h2>
+        <div class="form-stack" [formGroup]="enderecoForm">
+          <div class="field">
+            <label for="cep">CEP *</label>
+            <input
+              id="cep"
+              type="text"
+              pInputText
+              formControlName="cep"
+              (blur)="buscarCep()"
+              placeholder="00000-000"
+              class="w-full"
+            />
+            <small *ngIf="loadingCep()">Buscando CEP…</small>
+          </div>
+          <div class="field">
+            <label for="estado">Estado *</label>
+            <input id="estado" type="text" pInputText formControlName="estado" class="w-full" />
+          </div>
+          <div class="field">
+            <label for="rua">Rua *</label>
+            <input id="rua" type="text" pInputText formControlName="rua" class="w-full" />
+          </div>
+          <div class="field">
+            <label for="bairro">Bairro *</label>
+            <input id="bairro" type="text" pInputText formControlName="bairro" class="w-full" />
+          </div>
+          <div class="field">
+            <label for="numero">Número *</label>
+            <input
+              id="numero"
+              type="text"
+              pInputText
+              formControlName="numero"
+              inputmode="numeric"
+              class="w-full"
+            />
+          </div>
+          <div class="field">
+            <label for="complemento">Complemento</label>
+            <input id="complemento" type="text" pInputText formControlName="complemento" class="w-full" />
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <p-button label="Cancelar" severity="secondary" type="button" routerLink="/lista"></p-button>
+          <p-button
+            label="Salvar alterações"
+            icon="pi pi-check"
+            type="submit"
+            [loading]="saving()"
+          ></p-button>
+        </div>
+      </form>
+    </p-card>
+  }
+</div>

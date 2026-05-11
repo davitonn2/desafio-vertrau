@@ -1,0 +1,142 @@
+:host {
+  display: block;
+}
+
+.lista-wrap {
+  max-width: min(72rem, 100%);
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem;
+}
+
+.lista-intro h1 {
+  margin: 0 0 0.35rem;
+  font-size: 1.65rem;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+  color: var(--app-text);
+}
+
+.lista-intro p {
+  margin: 0 0 1.25rem;
+  font-size: 0.95rem;
+  color: var(--app-muted);
+}
+
+.lista-filtros {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--app-border);
+}
+
+.filtros-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--app-muted);
+  width: 100%;
+}
+
+@media (min-width: 720px) {
+  .filtros-label {
+    width: auto;
+    margin-right: 0.25rem;
+  }
+}
+
+.filtro-field {
+  min-width: 10rem;
+  flex: 1 1 8rem;
+}
+
+::ng-deep .filtro-select {
+  min-width: 9rem;
+}
+
+.col-acoes {
+  width: 6.5rem;
+  white-space: nowrap;
+  text-align: center;
+}
+
+
+.lista-msg {
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.lista-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 2.5rem 1rem;
+  color: var(--app-muted);
+}
+
+.lista-pager {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--app-border);
+}
+
+.pager-info {
+  font-size: 0.9rem;
+  color: var(--app-text);
+}
+
+.pager-info .muted {
+  color: var(--app-muted);
+  margin-left: 0.35rem;
+}
+
+.col-endereco {
+  max-width: 22rem;
+  white-space: normal;
+  font-size: 0.85rem;
+  line-height: 1.35;
+  color: var(--app-muted);
+}
+
+.empty-cell {
+  text-align: center;
+  padding: 2rem !important;
+  color: var(--app-muted);
+}
+
+::ng-deep .lista-card.p-card {
+  background: var(--app-surface);
+  border: 1px solid var(--app-border);
+  border-radius: var(--app-radius);
+  box-shadow: var(--app-shadow);
+}
+
+::ng-deep .lista-table.p-datatable .p-datatable-thead > tr > th {
+  background: var(--app-surface-2);
+  color: var(--app-muted);
+  font-weight: 600;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+::ng-deep .lista-table.p-datatable .p-datatable-tbody > tr > td {
+  border-color: var(--app-border);
+}
+
+::ng-deep .lista-table.p-datatable .p-datatable-tbody > tr:nth-child(even) {
+  background: rgba(243, 236, 227, 0.45);
+}
+
+::ng-deep .lista-table.p-datatable .p-datatable-tbody > tr:hover {
+  background: rgba(184, 71, 42, 0.06) !important;
+}
