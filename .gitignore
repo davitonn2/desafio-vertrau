@@ -1,0 +1,10 @@
+# Pastas do .NET
+[Bb]in/
+[Oo]bj/
+*.db-shm
+*.db-wal
+
+# Pastas do Angular
+node_modules/
+dist/
+.angular/
