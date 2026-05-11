@@ -1,0 +1,45 @@
+@host = http://localhost:5278
+
+### Listar (paginação)
+GET {{host}}/usuarios?pagina=1&tamanhoPagina=10
+Accept: application/json
+
+###
+POST {{host}}/usuarios
+Content-Type: application/json
+
+{
+  "nome": "Maria",
+  "sobrenome": "Silva",
+  "email": "maria.silva@example.com",
+  "genero": "Feminino",
+  "dataNascimento": "1990-05-15T00:00:00",
+  "endereco": {
+    "cep": "01310100",
+    "estado": "SP",
+    "rua": "Av. Paulista",
+    "bairro": "Bela Vista",
+    "numero": 1000,
+    "complemento": "Sala 1"
+  }
+}
+
+###
+GET {{host}}/usuarios/1
+Accept: application/json
+
+###
+PUT {{host}}/usuarios/1
+Content-Type: application/json
+
+{
+  "nome": "Maria",
+  "sobrenome": "Silva Santos",
+  "email": "maria.silva@example.com",
+  "genero": "Feminino",
+  "dataNascimento": "1990-05-15T00:00:00",
+  "endereco": null
+}
+
+###
+DELETE {{host}}/usuarios/1
