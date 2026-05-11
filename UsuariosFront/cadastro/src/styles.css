@@ -1,0 +1,115 @@
+/* Tema claro, papel quente + acento terracota (evita visual “dark + verde neon”) */
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+
+:root {
+  --app-bg: #e8e4dc;
+  --app-bg-gradient: radial-gradient(900px 480px at 0% 0%, #d4e4ea 0%, transparent 55%),
+    radial-gradient(700px 420px at 100% 100%, #e5ddd4 0%, transparent 50%);
+  --app-surface: #fffcf7;
+  --app-surface-2: #f3ece3;
+  --app-border: rgba(44, 40, 37, 0.12);
+  --app-border-strong: rgba(44, 40, 37, 0.2);
+  --app-text: #2a2622;
+  --app-muted: #6f6860;
+  --app-accent: #b8472a;
+  --app-accent-hover: #9c3b24;
+  --app-accent-dim: rgba(184, 71, 42, 0.18);
+  --app-accent-contrast: #fffaf7;
+  --app-radius: 12px;
+  --app-shadow: 0 4px 24px rgba(42, 38, 34, 0.08), 0 1px 3px rgba(42, 38, 34, 0.06);
+  color-scheme: light;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: 'Source Sans 3', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+  background-color: var(--app-bg);
+  background-image: var(--app-bg-gradient);
+  background-attachment: fixed;
+  color: var(--app-text);
+  -webkit-font-smoothing: antialiased;
+}
+
+.p-inputtext,
+.p-select,
+.p-datepicker-input {
+  background: var(--app-surface) !important;
+  border-color: var(--app-border-strong) !important;
+  color: var(--app-text) !important;
+  border-radius: 10px !important;
+}
+
+.p-inputtext:enabled:hover,
+.p-select:not(.p-disabled):hover {
+  border-color: rgba(184, 71, 42, 0.35) !important;
+}
+
+.p-inputtext:enabled:focus,
+.p-select.p-focus {
+  border-color: var(--app-accent) !important;
+  box-shadow: 0 0 0 3px var(--app-accent-dim) !important;
+}
+
+.p-card {
+  color: var(--app-text);
+}
+
+.p-dialog .p-dialog-header,
+.p-dialog .p-dialog-content {
+  background: var(--app-surface) !important;
+  color: var(--app-text) !important;
+  border-color: var(--app-border) !important;
+}
+
+.p-dialog .p-dialog-footer {
+  background: var(--app-surface) !important;
+  border-color: var(--app-border) !important;
+}
+
+.p-button.p-button-secondary {
+  background: var(--app-surface-2) !important;
+  border-color: var(--app-border-strong) !important;
+  color: var(--app-text) !important;
+}
+
+.p-button.p-button-secondary:not(:disabled):hover {
+  background: #ebe3d8 !important;
+  border-color: var(--app-muted) !important;
+}
+
+/* Primário: alinha botões principais ao acento do app */
+.p-button:not(.p-button-secondary):not(.p-button-outlined):not(.p-button-text):not(
+    .p-button-success
+  ):not(.p-button-info):not(.p-button-warn):not(.p-button-help):not(.p-button-danger):not(
+    .p-button-contrast
+  ) {
+  background: var(--app-accent) !important;
+  border-color: var(--app-accent) !important;
+  color: var(--app-accent-contrast) !important;
+}
+
+.p-button:not(.p-button-secondary):not(.p-button-outlined):not(.p-button-text):not(
+    .p-button-success
+  ):not(.p-button-info):not(.p-button-warn):not(.p-button-help):not(.p-button-danger):not(
+    .p-button-contrast
+  ):not(:disabled):hover {
+  background: var(--app-accent-hover) !important;
+  border-color: var(--app-accent-hover) !important;
+}
+
+.p-toast .p-toast-message {
+  border-radius: 10px;
+}
