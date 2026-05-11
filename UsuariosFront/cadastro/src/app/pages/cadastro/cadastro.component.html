@@ -1,0 +1,152 @@
+<p-toast></p-toast>
+
+<div class="cadastro-wrap">
+  <div class="cadastro-intro">
+    <h1>Novo cadastro</h1>
+    <p>Preencha os dados do usuário e do endereço em duas etapas.</p>
+  </div>
+
+  <p-card styleClass="cadastro-card">
+    <p-steps
+      [model]="steps"
+      [activeIndex]="activeIndex()"
+      [readonly]="true"
+      styleClass="cadastro-steps mb-4"
+    ></p-steps>
+
+    <!-- ABA 1 -->
+    <form
+      *ngIf="activeIndex() === 0"
+      [formGroup]="usuarioForm"
+      class="form-stack"
+    >
+      <div class="field">
+        <label for="nome">Nome *</label>
+        <input id="nome" type="text" pInputText formControlName="nome" class="w-full" />
+      </div>
+
+      <div class="field">
+        <label for="sobrenome">Sobrenome *</label>
+        <input id="sobrenome" type="text" pInputText formControlName="sobrenome" class="w-full" />
+      </div>
+
+      <div class="field">
+        <label for="email">E-mail *</label>
+        <input id="email" type="email" pInputText formControlName="email" class="w-full" autocomplete="email" />
+      </div>
+
+      <div class="field">
+        <label for="dataNascimento">Data de nascimento</label>
+        <input id="dataNascimento" type="date" pInputText formControlName="dataNascimento" class="w-full" />
+      </div>
+
+      <div class="field">
+        <label for="genero">Gênero *</label>
+        <p-select
+          inputId="genero"
+          [options]="generos"
+          optionLabel="label"
+          optionValue="value"
+          formControlName="genero"
+          placeholder="Selecione"
+          styleClass="w-full"
+        ></p-select>
+      </div>
+
+      <div class="form-actions form-actions--end mt-3">
+        <p-button label="Próximo" icon="pi pi-arrow-right" iconPos="right" (onClick)="proximo()"></p-button>
+      </div>
+    </form>
+
+    <!-- ABA 2 -->
+    <form
+      *ngIf="activeIndex() === 1"
+      [formGroup]="enderecoForm"
+      class="form-stack"
+    >
+      <div class="field">
+        <label for="cep">CEP *</label>
+        <input
+          id="cep"
+          type="text"
+          pInputText
+          formControlName="cep"
+          (blur)="buscarCep()"
+          placeholder="00000-000"
+          class="w-full"
+        />
+        <small *ngIf="loadingCep()">Buscando CEP…</small>
+      </div>
+
+      <div class="field">
+        <label for="estado">Estado *</label>
+        <input id="estado" type="text" pInputText formControlName="estado" class="w-full" />
+      </div>
+
+      <div class="field">
+        <label for="rua">Rua *</label>
+        <input id="rua" type="text" pInputText formControlName="rua" class="w-full" />
+      </div>
+
+      <div class="field">
+        <label for="bairro">Bairro *</label>
+        <input id="bairro" type="text" pInputText formControlName="bairro" class="w-full" />
+      </div>
+
+      <div class="field">
+        <label for="numero">Número *</label>
+        <input
+          id="numero"
+          type="text"
+          pInputText
+          formControlName="numero"
+          inputmode="numeric"
+          class="w-full"
+        />
+      </div>
+
+      <div class="field">
+        <label for="complemento">Complemento</label>
+        <input id="complemento" type="text" pInputText formControlName="complemento" class="w-full" />
+      </div>
+
+      <div class="form-actions form-actions--between mt-3">
+        <p-button label="Voltar" icon="pi pi-arrow-left" severity="secondary" (onClick)="voltar()"></p-button>
+        <p-button label="Salvar" icon="pi pi-check" (onClick)="abrirResumo()"></p-button>
+      </div>
+    </form>
+  </p-card>
+</div>
+
+<!-- DIALOG RESUMO -->
+<p-dialog
+  header="Confirmar dados do cadastro"
+  [visible]="showDialog()"
+  (visibleChange)="showDialog.set($event)"
+  [modal]="true"
+  [style]="{ width: 'min(32rem, 94vw)' }"
+  [closable]="!saving()"
+  styleClass="cadastro-dialog"
+>
+  <div class="dialog-resumo">
+    <h4>Usuário</h4>
+    <div><strong>Nome:</strong> {{ resumo.usuario.nome }} {{ resumo.usuario.sobrenome }}</div>
+    <div><strong>E-mail:</strong> {{ resumo.usuario.email }}</div>
+    <div *ngIf="resumo.usuario.dataNascimento"><strong>Nascimento:</strong> {{ resumo.usuario.dataNascimento }}</div>
+    <div><strong>Gênero:</strong> {{ resumo.usuario.genero }}</div>
+
+    <h4 class="mt-3">Endereço</h4>
+    <div><strong>CEP:</strong> {{ resumo.endereco.cep }}</div>
+    <div><strong>Estado:</strong> {{ resumo.endereco.estado }}</div>
+    <div><strong>Rua:</strong> {{ resumo.endereco.rua }}, {{ resumo.endereco.numero }}</div>
+    <div><strong>Bairro:</strong> {{ resumo.endereco.bairro }}</div>
+    <div *ngIf="resumo.endereco.complemento">
+      <strong>Complemento:</strong> {{ resumo.endereco.complemento }}
+    </div>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <p-button label="Cancelar" severity="secondary" (onClick)="showDialog.set(false)" [disabled]="saving()"></p-button>
+    <p-button label="Confirmar e enviar" icon="pi pi-send" (onClick)="confirmarEnvio()" [loading]="saving()"></p-button>
+  </ng-template>
+</p-dialog>
